@@ -15,11 +15,21 @@ public class Player : MonoBehaviour
     
     private bool b = false;
 
+    private SpriteRenderer R;
+
+    private Animator A;
+
     void Start()
     {
         b = false;
 
         rb2d = GetComponent<Rigidbody2D>();
+
+        R = GetComponent<SpriteRenderer>();
+
+        A = GetComponent<Animator>();
+
+
 
     }
 
@@ -43,10 +53,12 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        Destroy(GetComponent<Animator>());
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        renderer.sprite = sp;
+        if (A != null)
+        { 
+            Destroy(A);
+            A = null;
+        }
+        R.sprite = sp;
         b = true;
 
     }
